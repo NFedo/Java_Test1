@@ -72,13 +72,13 @@ public class TestBase {
   }
 
   protected void deleteSelectedGroups() {
-      wd.findElement(By.xpath("//div[@id='content']/form/input[5]")).click();
+    wd.findElement(By.xpath("//div[@id='content']/form/input[5]")).click();
   }
 
   protected void selectGroup() {
-      if (!wd.findElement(By.xpath("//div[@id='content']/form/span[7]/input")).isSelected()) {
-          wd.findElement(By.xpath("//div[@id='content']/form/span[7]/input")).click();
-      }
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/span[7]/input")).isSelected()) {
+      wd.findElement(By.xpath("//div[@id='content']/form/span[7]/input")).click();
+    }
   }
 
   protected void returnToHomePage() {
@@ -119,7 +119,7 @@ public class TestBase {
       wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[" + contactData.getiDay() + "]")).click();
     }
     // месяц
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[" + contactData.getiMonth() +  "]")).isSelected()) {
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[" + contactData.getiMonth() + "]")).isSelected()) {
       wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[" + contactData.getiMonth() + "]")).click();
     }
     // год
