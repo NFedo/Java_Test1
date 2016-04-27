@@ -42,8 +42,38 @@ public class ContactHelper extends HelperBase {
     // год
     type(By.name("byear"),contactData.getYear());
     // группа контактов
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[" + contactData.getiGroup() + "]")).isSelected()) {
-      click(By.xpath("//div[@id='content']/form/select[5]//option[" + contactData.getiGroup() + "]"));
-    }
+   // if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[" + contactData.getiGroup() + "]")).isSelected()) {
+   //   click(By.xpath("//div[@id='content']/form/select[5]//option[" + contactData.getiGroup() + "]"));
+   // }
+  }
+
+  // редактируем только часть полей, группу контактов изменить нельзя
+  public void editContactForm(ContactData contactData) {
+    type(By.name("company"),contactData.getCompany());
+    type(By.name("address"),contactData.getAddress());
+    type(By.name("home"),contactData.getPhoneHome());
+    type(By.name("mobile"),contactData.getPhoneMobile());
+    type(By.name("email"),contactData.getEmail());
+  }
+
+  public void selectContact() {
+     click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[1]/input"));
+  }
+
+  public void initContactModification() {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
+  // кнопка Delete на форме для редактирования
+  public void initContactDeletion() {
+    click(By.xpath("//div[@id='content']/form[2]/input[2]"));
+  }
+  // закрывает окно
+  public void submitContactDeletion() {
+    wd.switchTo().alert().accept();
   }
 }
+

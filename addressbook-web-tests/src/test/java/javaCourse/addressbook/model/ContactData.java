@@ -12,7 +12,8 @@ public class ContactData {
   private final int iDay;
   private final int iMonth;
   private final String year;
-  private final int iGroup;
+  // private final int iGroup;
+  private int iGroup;
 
   public ContactData(String firstName, String lastName, String nickName, String company, String address,
                      String phoneHome, String phoneMobile, String email, int iDay, int iMonth, String year, int iGroup) {
@@ -74,7 +75,5 @@ public class ContactData {
     return year;
   }
 
-  public int getiGroup() {
-    return iGroup;
-  }
+  public int getiGroup() { return iGroup; }
 }
