@@ -57,7 +57,12 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectContact() {
-     click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[1]/input"));
+  //  if (!wd.findElement(By.id("40")).isSelected()) {
+  //    wd.findElement(By.id("40")).click();}
+  //  click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[1]/input"));
+  //  click(By.id("37"));
+  //  select(By.xpath("//table[@id='maintable']/tbody/tr[5]/td[1]/checkbox"));
+
   }
 
   public void initContactModification() {

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
  * Created by Nadejda.Fedorova on 26.04.2016.
  */
 public class ContactDeletionTests extends TestBase {
+
   @Test
   public void testContactDeletion() {
 
@@ -14,11 +15,14 @@ public class ContactDeletionTests extends TestBase {
     app.getContactHelper().initContactDeletion();
     // app.getContactHelper().submitContactDeletion();
     app.getContactHelper().returnToHomePage();
+  }
 
-   // app.getNavigationHelper().gotoHomePage();
-   // app.getContactHelper().selectContact();
-   // app.getContactHelper().initContactDeletion();
-   // app.getContactHelper().submitContactDeletion();
-   // app.getContactHelper().returnToHomePage();
+  // @Test
+  public void testContactDeletion1() {
+    app.getNavigationHelper().gotoHomePage();
+    app.getContactHelper().selectContact();
+    app.getContactHelper().initContactDeletion();
+    app.getContactHelper().submitContactDeletion();
+    app.getContactHelper().returnToHomePage();
   }
 }

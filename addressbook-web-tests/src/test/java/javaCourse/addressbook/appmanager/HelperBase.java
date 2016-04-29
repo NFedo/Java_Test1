@@ -24,6 +24,12 @@ public class HelperBase {
     wd.findElement(locator).sendKeys(text);
   }
 
+  protected void select (By locator) {
+    if (!wd.findElement(locator).isSelected()) {
+      wd.findElement(locator).click();
+    }
+  }
+
   public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
