@@ -2,14 +2,14 @@ package javaCourse.addressbook.appmanager;
 
 import javaCourse.addressbook.model.GroupData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Created by Nadejda.Fedorova on 25.04.2016.
  */
 public class GroupHelper extends HelperBase {
 
-  public GroupHelper(FirefoxDriver wd) {
+  public GroupHelper(WebDriver wd) {
     super(wd);
   }
 
