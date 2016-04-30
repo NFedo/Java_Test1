@@ -14,7 +14,7 @@ public class ContactModificationTests extends TestBase {
     //app.getContactHelper().selectContact();
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Nadejda4", "Fedorova4", "NF4", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-            "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", 8, 6, "1983", 2));
+            "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", 8, 6, "1983", null), false);
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToHomePage();
   }
@@ -25,7 +25,7 @@ public class ContactModificationTests extends TestBase {
     //app.getContactHelper().selectContact();
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Nadejda6", "Fedorova6", "NF6", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-            "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", 8, 6, "1983", 0));
+            "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", 8, 6, "1983", null), false);
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToHomePage();
   }
@@ -36,7 +36,7 @@ public class ContactModificationTests extends TestBase {
     //app.getContactHelper().selectContact();
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Nadejda6", "Fedorova6", "NF6", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-            "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", 8, 6, "1983", 0));
+            "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", 8, 6, "1983", null), false);
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToHomePage();
   }

@@ -2,7 +2,10 @@ package javaCourse.addressbook.appmanager;
 
 import javaCourse.addressbook.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 /**
  * Created by Nadejda.Fedorova on 25.04.2016.
@@ -21,7 +24,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"),contactData.getFirstName());
     type(By.name("lastname"),contactData.getLastName());
     type(By.name("nickname"),contactData.getNickName());
@@ -45,6 +48,16 @@ public class ContactHelper extends HelperBase {
    // if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[" + contactData.getiGroup() + "]")).isSelected()) {
    //   click(By.xpath("//div[@id='content']/form/select[5]//option[" + contactData.getiGroup() + "]"));
    // }
+
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getiGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
+
+    //if (isElementPresent(By.name("new_group"))) {
+    //  new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getiGroup());
+    //}
   }
 
   // редактируем только часть полей, группу контактов изменить нельзя
