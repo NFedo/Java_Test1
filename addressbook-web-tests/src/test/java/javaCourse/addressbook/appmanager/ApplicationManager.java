@@ -20,9 +20,7 @@ public class ApplicationManager {
   private GroupHelper groupHelper;
   private String browser;
 
-  public ApplicationManager(String browser) {
-    this.browser = browser;
-  }
+  public ApplicationManager(String browser) {   this.browser = browser;  }
 
   public void init() {
     // String browser = BrowserType.FIREFOX; // BrowserType входит в Selenium
@@ -33,7 +31,7 @@ public class ApplicationManager {
     } else if (browser == BrowserType.IE) {
       wd = new InternetExplorerDriver();
     }
-    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
     groupHelper = new GroupHelper(wd);
     contactHelper = new ContactHelper(wd);

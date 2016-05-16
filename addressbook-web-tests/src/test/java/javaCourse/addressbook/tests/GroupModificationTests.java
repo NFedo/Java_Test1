@@ -19,7 +19,7 @@ public class GroupModificationTests extends TestBase {
     app.getGroupHelper().fillGroupForm(new GroupData("test1", "test31_new2", "test31_new2"));
     // app.getGroupHelper().fillGroupForm(new GroupData("test1", null, null)); // исключение
     app.getGroupHelper().submitGroupModification();
-    app.getNavigationHelper().gotoGroupPage();
+    app.getGroupHelper().returnToGroupPage();
   }
 
 }
