@@ -14,7 +14,7 @@ public class ContactDeletionTests extends TestBase {
     app.getNavigationHelper().gotoHomePage();
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-              "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com",/* 8, 6, "1983",*/ "test31"), true);
+              "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com",/* 8, 6, "1983",*/ "test31"));
     }
     app.getContactHelper().selectContact();
     app.getContactHelper().initContactDeletion();
@@ -27,7 +27,7 @@ public class ContactDeletionTests extends TestBase {
     app.getNavigationHelper().gotoHomePage();
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-              "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com",/* 8, 6, "1983",*/ "test61"), true);
+              "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com",/* 8, 6, "1983",*/ "test61"));
     }
     app.getContactHelper().selectContact();
     app.getContactHelper().initContactDeletion();
