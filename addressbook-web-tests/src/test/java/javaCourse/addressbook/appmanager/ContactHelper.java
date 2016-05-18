@@ -1,10 +1,15 @@
 package javaCourse.addressbook.appmanager;
 
 import javaCourse.addressbook.model.ContactData;
+import javaCourse.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Nadejda.Fedorova on 25.04.2016.
@@ -51,8 +56,9 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
+    //click(By.name("selected[]"));
   }
 
   public void initContactModification() {
@@ -95,5 +101,29 @@ public class ContactHelper extends HelperBase {
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
-}
 
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']//tr[@name='entry']"));
+    for (WebElement element : elements) {
+      String firstName = element.findElement(By.xpath("td[3]")).getText();
+      String lastName = element.findElement(By.xpath("td[2]")).getText();
+      ContactData contact = new ContactData(firstName, lastName, null, null, null, null, null, null, null );
+      contacts.add(contact);
+    }
+    return contacts;
+  }
+}
+/*
+  public List<GroupData> getGroupList() {
+    List<GroupData> groups = new ArrayList<GroupData>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    for (WebElement element : elements) {
+      String name = element.getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      GroupData group = new GroupData(id, name, null, null);
+      groups.add(group);
+    }
+    return groups;
+  }
+  */

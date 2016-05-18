@@ -4,6 +4,8 @@ import javaCourse.addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 /**
  * Created by Nadejda.Fedorova on 26.04.2016.
  */
@@ -16,16 +18,18 @@ public class ContactModificationTests extends TestBase {
       app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
                "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", /*8, 6, "1983"*,*/ "test1"));
     }
-    int before = app.getContactHelper().getContactCount();
-    // app.getContactHelper().selectContact();
+    List<ContactData> before = app.getContactHelper().getContactList();
+    // int before = app.getContactHelper().getContactCount();
+    app.getContactHelper().selectContact(before.size() - 1);
     app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("Nadejda4", "Fedorova4", "NF4", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
+    app.getContactHelper().fillContactForm(new ContactData("Nadejda5", "Fedorova5", "NF5", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
               "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", /*8, 6, "1983",*/ null), false);
 
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToHomePage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    // int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after.size(), before.size());
   }
 
   @Test
@@ -35,15 +39,17 @@ public class ContactModificationTests extends TestBase {
       app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
               "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com",/* 8, 6, "1983",*/ "test41"));
     }
-    int before = app.getContactHelper().getContactCount();
-    // app.getContactHelper().selectContact();
+    List<ContactData> before = app.getContactHelper().getContactList();
+    // int before = app.getContactHelper().getContactCount();
+    app.getContactHelper().selectContact(before.size() - 1);
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Nadejda6", "Fedorova6", "NF6", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
             "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", /*8, 6, "1983",*/ null), false);
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToHomePage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    // int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after.size(), before.size());
   }
 
   @Test
@@ -53,14 +59,16 @@ public class ContactModificationTests extends TestBase {
       app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
               "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", /*8, 6, "1983",*/ "test31"));
     }
-    int before = app.getContactHelper().getContactCount();
-    // app.getContactHelper().selectContact();
+    List<ContactData> before = app.getContactHelper().getContactList();
+    // int before = app.getContactHelper().getContactCount();
+    app.getContactHelper().selectContact(before.size() - 1);
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Nadejda6", "Fedorova6", "NF6", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
             "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", /*8, 6, "1983",*/ null), false);
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToHomePage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    // int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after.size(), before.size());
   }
 }
