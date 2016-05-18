@@ -3,7 +3,6 @@ package javaCourse.addressbook.model;
 public class GroupData {
 
   private int id;
-
   private final String name;
   private final String header;
   private final String footer;
@@ -58,7 +57,6 @@ public class GroupData {
     GroupData groupData = (GroupData) o;
 
     return name != null ? name.equals(groupData.name) : groupData.name == null;
-
   }
 
   @Override
