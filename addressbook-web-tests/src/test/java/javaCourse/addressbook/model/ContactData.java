@@ -1,6 +1,7 @@
 package javaCourse.addressbook.model;
 
 public class ContactData {
+  private int id = Integer.MAX_VALUE;
   private String firstName;
   private String lastName;
   private String nickName;
@@ -15,9 +16,9 @@ public class ContactData {
   // private int iGroup;
   private String iGroup;
 
-  public String getFirstName() {
-    return firstName;
-  }
+  public int getId() { return id;  }
+
+  public String getFirstName() { return firstName; }
 
   public String getLastName() {
     return lastName;
@@ -55,34 +56,18 @@ public class ContactData {
 
   public String getiGroup() { return iGroup; }
 
-  public String getFullName() { return lastName + firstName; }
-
-
   @Override
   public String toString() {
     return "ContactData{" +
+            "id='" + id + '\'' +
             "firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             '}';
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    ContactData that = (ContactData) o;
-
-    if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-    return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
-
-  }
-
-  @Override
-  public int hashCode() {
-    int result = firstName != null ? firstName.hashCode() : 0;
-    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-    return result;
+  public ContactData withId (int id) {
+    this.id = id;
+    return this;
   }
 
   public ContactData withFirstName(String firstName) {
@@ -143,5 +128,26 @@ public class ContactData {
   public ContactData withiGroup(String iGroup) {
     this.iGroup = iGroup;
     return this;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    if (id != that.id) return false;
+    if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+    return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+    return result;
   }
 }
