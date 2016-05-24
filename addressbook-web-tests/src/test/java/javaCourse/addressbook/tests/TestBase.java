@@ -2,24 +2,24 @@ package javaCourse.addressbook.tests;
 
 import javaCourse.addressbook.appmanager.ApplicationManager;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 /**
  * Created by Nadejda.Fedorova on 23.04.2016.
  */
 public class TestBase {
+  // static - функция статическая не ассоциированная с объектом  -  глобальная переменная app
+  // protected static final ApplicationManager app = new ApplicationManager(BrowserType.IE);
+  // protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
-  // protected final ApplicationManager app = new ApplicationManager(BrowserType.IE);
-   protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
-  // protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
-
-  @BeforeMethod
+  @BeforeSuite
   public void setUp() throws Exception {
     app.init();
   }
 
-  @AfterMethod
+  @AfterSuite
   public void tearDown() {
     app.stop();
   }

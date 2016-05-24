@@ -1,35 +1,19 @@
 package javaCourse.addressbook.model;
 
 public class ContactData {
-  private final String firstName;
-  private final String lastName;
-  private final String nickName;
-  private final String company;
-  private final String address;
-  private final String phoneHome;
-  private final String phoneMobile;
-  private final String email;
-  // private final int iDay;
-  // private final int iMonth;
-  // private final String year;
-  // private final int iGroup;
+  private String firstName;
+  private String lastName;
+  private String nickName;
+  private String company;
+  private String address;
+  private String phoneHome;
+  private String phoneMobile;
+  private String email;
+  // private int iDay;
+  // private int iMonth;
+  // private String year;
+  // private int iGroup;
   private String iGroup;
-
-  public ContactData(String firstName, String lastName, String nickName, String company, String address,
-                     String phoneHome, String phoneMobile, String email ,/* int iDay, int iMonth, String year,*/ String iGroup) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.nickName = nickName;
-    this.company = company;
-    this.address = address;
-    this.phoneHome = phoneHome;
-    this.phoneMobile = phoneMobile;
-    this.email = email;
-   // this.iDay = iDay + 2; // чтобы задать число
-   // this.iMonth = iMonth + 1; // чтобы задать месяц
-   // this.year = year;
-    this.iGroup = iGroup;
-  }
 
   public String getFirstName() {
     return firstName;
@@ -99,5 +83,65 @@ public class ContactData {
     int result = firstName != null ? firstName.hashCode() : 0;
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
+  }
+
+  public ContactData withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public ContactData withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withNickName(String nickName) {
+    this.nickName = nickName;
+    return this;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withPhoneHome(String phoneHome) {
+    this.phoneHome = phoneHome;
+    return this;
+  }
+
+  public ContactData withPhoneMobile(String phoneMobile) {
+    this.phoneMobile = phoneMobile;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+ /* public ContactData withiDay(int iDay) {
+    this.iDay = iDay + 2; // чтобы задать число;
+    return this;
+  }
+
+  public ContactData withiMonth(int iMonth) {
+    this.iMonth = iMonth + 1; // чтобы задать месяц;
+    return this;
+  }
+
+  public ContactData withYear(String year) {
+    this.year = year;
+    return this;
+  }*/
+
+  public ContactData withiGroup(String iGroup) {
+    this.iGroup = iGroup;
+    return this;
   }
 }

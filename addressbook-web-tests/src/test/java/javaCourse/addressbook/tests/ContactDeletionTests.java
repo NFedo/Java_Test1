@@ -2,6 +2,7 @@ package javaCourse.addressbook.tests;
 
 import javaCourse.addressbook.model.ContactData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -12,22 +13,23 @@ import java.util.List;
  */
 public class ContactDeletionTests extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().homePage();
+    if (!app.contact().isThereAContact()) {
+      app.contact().create(new ContactData().withFirstName("Nadejda7").withLastName("Fedorova7"));
+    }
+  }
+
   @Test
   public void testContactDeletion() {
-    app.getNavigationHelper().gotoHomePage();
-      if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-              "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com",/* 8, 6, "1983",*/ "test31"));
-    }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().initContactDeletion();
-    app.getContactHelper().submitContactDeletion();
-    app.getContactHelper().returnToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() - 1);
+    List<ContactData> before = app.contact().list();
+    int index = before.size() - 1;
+    app.contact().delete(index);
+    List<ContactData> after = app.contact().list();
+    Assert.assertEquals(after.size(), index);
     // удаляем последний контакт
-    before.remove(before.size() - 1);
+    before.remove(index);
     // Сортировка по фамилиям и именам
     Comparator<? super ContactData> byFullName = (c1, c2) -> c1.getFullName().compareTo(c2.getFullName());
     before.sort(byFullName);
@@ -37,20 +39,13 @@ public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testContactDeletion1() {
-    app.getNavigationHelper().gotoHomePage();
-    if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-              "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com",/* 8, 6, "1983",*/ "test41"));
-    }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().initContactDeletion();
-    app.getContactHelper().submitContactDeletion();
-    app.getContactHelper().returnToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() - 1);
+    List<ContactData> before = app.contact().list();
+    int index = before.size() - 1;
+    app.contact().delete(index);
+    List<ContactData> after = app.contact().list();
+    Assert.assertEquals(after.size(), index);
     // удаляем последний контакт
-    before.remove(before.size() - 1);
+    before.remove(index);
     // Сортировка по фамилиям и именам
     Comparator<? super ContactData> byFullName = (c1, c2) -> c1.getFullName().compareTo(c2.getFullName());
     before.sort(byFullName);

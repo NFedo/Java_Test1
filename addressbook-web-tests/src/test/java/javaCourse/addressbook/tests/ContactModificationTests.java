@@ -2,6 +2,7 @@ package javaCourse.addressbook.tests;
 
 import javaCourse.addressbook.model.ContactData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -12,25 +13,29 @@ import java.util.List;
  */
 public class ContactModificationTests extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().homePage();
+    if (!app.contact().isThereAContact()) {
+      app.contact().create(new ContactData().withFirstName("Nadejda7").withLastName("Fedorova7"));
+    }
+  }
+
   @Test
   public void testContactModification() {
-    app.getNavigationHelper().gotoHomePage();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-               "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", /*8, 6, "1983"*,*/ "test1"));
-    }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().initContactModification(before.size() - 1);
-    ContactData contact = new ContactData("Nadejda9", "Fedorova5", "NF5", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-            "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", /*8, 6, "1983",*/ null);
-    app.getContactHelper().fillContactForm(contact, false);
-    app.getContactHelper().submitContactModification();
-    app.getContactHelper().returnToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
+    int index = before.size() - 1;
+    ContactData contact = new ContactData().withFirstName("Nadejda7").withLastName("Fedorova7").withNickName("NF7")
+            .withCompany("Peter-Service").withAddress("Шпалерная ул., дом 36, оф. 503")
+            .withPhoneHome("921-791-1113").withPhoneMobile("921-791-1114")
+            .withEmail("nadejda7.fedorova7@peter-service.com")
+            /* 8, 6, "1983",*/
+            ;
+    app.contact().modify(index, contact);
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());
     // удаляем последний контакт и на его место добавляем новый
-    before.remove(before.size() - 1);
+    before.remove(index);
     before.add(contact);
 
     // Сортировка только по именам
@@ -42,23 +47,19 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification1() {
-    app.getNavigationHelper().gotoHomePage();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Nadejda3", "Fedorova3", "NF3", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-              "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com",/* 8, 6, "1983",*/ "test41"));
-    }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().initContactModification(before.size() - 1);
-    ContactData contact = new ContactData("Nadejda9", "Fedorova5", "NF5", "Peter-Service", "Шпалерная ул., дом 36, оф. 503",
-            "921-791-1113", "921-791-1114", "nadejda2.fedorova2@peter-service.com", /*8, 6, "1983",*/ null);
-    app.getContactHelper().fillContactForm(contact, false);
-    app.getContactHelper().submitContactModification();
-    app.getContactHelper().returnToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
+    int index = before.size() - 1;
+    ContactData contact = new ContactData().withFirstName("Nadejda7").withLastName("Fedorova7").withNickName("NF7")
+            .withCompany("Peter-Service").withAddress("Шпалерная ул., дом 36, оф. 503")
+            .withPhoneHome("921-791-1113").withPhoneMobile("921-791-1114")
+            .withEmail("nadejda7.fedorova7@peter-service.com")
+            /* 8, 6, "1983",*/
+            ;
+    app.contact().modify(index, contact);
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());
     // удаляем последний контакт и на его место добавляем новый
-    before.remove(before.size() - 1);
+    before.remove(index);
     before.add(contact);
 
     // Сортировка по фамилиям и именам

@@ -2,6 +2,7 @@ package javaCourse.addressbook.tests;
 
 import javaCourse.addressbook.model.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -9,24 +10,28 @@ import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().groupPage();
+    if (app.group().list().size() == 0) {
+      app.group().create(new GroupData().withName("test61").withHeader("test62").withFooter("test63"));
+    }
+  }
+
   @Test
   public void testGroupDeletion() {
-    app.getNavigationHelper().gotoGroupPage();
-    if (! app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test61", "test62", "test63"));
-    }
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().selectGroup(before.size() - 1); // последняя группа
-    app.getGroupHelper().deleteSelectedGroups();
-    app.getGroupHelper().returnToGroupPage();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
-    Assert.assertEquals(after.size(), before.size() - 1);
+    List<GroupData> before = app.group().list();
+    int index = before.size() - 1;
+    app.group().delete(index);
+    List<GroupData> after = app.group().list();
+    Assert.assertEquals(after.size(), index);
     // Удаляем последнюю группу
-    before.remove(before.size() - 1);
+    before.remove(index);
     Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(),g2.getId());
     before.sort(byId);
     after.sort(byId);
     // Сравниваем отсортированные группы
     Assert.assertEquals(before, after);
   }
+
 }

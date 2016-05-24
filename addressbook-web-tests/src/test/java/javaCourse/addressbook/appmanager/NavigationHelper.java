@@ -12,14 +12,14 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  public void gotoHomePage() {
+  public void homePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
     click(By.linkText("home"));
   }
 
-  public void gotoGroupPage() {
+  public void groupPage() {
     if (isElementPresent(By.tagName("h1"))
             &&  wd.findElement(By.tagName("h1")).getText().equals("Groups")
             && isElementPresent(By.name("new"))) {
@@ -28,7 +28,7 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
 
-  public void gotoAddNewContact() {
+  public void addNewContact() {
     if (isElementPresent(By.tagName("label"))
          &&  wd.findElement(By.tagName("label")).getText().equals("Secondary")) {
         return;
