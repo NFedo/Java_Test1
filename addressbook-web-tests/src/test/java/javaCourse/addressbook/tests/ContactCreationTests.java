@@ -1,17 +1,18 @@
 package javaCourse.addressbook.tests;
 
 import javaCourse.addressbook.model.ContactData;
-import org.testng.Assert;
+import javaCourse.addressbook.model.Contacts;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() {
     app.goTo().homePage();
-    Set<ContactData> before = app.contact().all();
+    Contacts before = app.contact().all();
     app.goTo().addNewContact();
     ContactData contact = new ContactData().withFirstName("Nadejda4").withLastName("Fedorova4").withNickName("NF3")
             .withCompany("Peter-Service").withAddress("Шпалерная ул., дом 36, оф. 503")
@@ -20,12 +21,9 @@ public class ContactCreationTests extends TestBase {
             /* 8, 6, "1983",*/
             .withiGroup("test1");
     app.contact().create(contact);
-    Set<ContactData> after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size() + 1);
-    // получаем идентификатор нового контакта
-    contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-    // добавляем новый контакт
-    before.add(contact);
-    Assert.assertEquals(before, after);
+    Contacts after = app.contact().all();
+    assertThat(after.size(), equalTo(before.size() + 1));
+    assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 }

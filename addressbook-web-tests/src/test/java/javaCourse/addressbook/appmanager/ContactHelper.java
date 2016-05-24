@@ -1,17 +1,14 @@
 package javaCourse.addressbook.appmanager;
 
 import javaCourse.addressbook.model.ContactData;
-import javaCourse.addressbook.model.GroupData;
+import javaCourse.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Nadejda.Fedorova on 25.04.2016.
@@ -110,8 +107,8 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public Set<ContactData> all() {
-    Set<ContactData> contacts = new HashSet<ContactData>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//table[@id='maintable']//tr[@name='entry']"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));

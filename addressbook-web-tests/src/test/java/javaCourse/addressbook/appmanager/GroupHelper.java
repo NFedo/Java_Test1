@@ -1,13 +1,12 @@
 package javaCourse.addressbook.appmanager;
 
 import javaCourse.addressbook.model.GroupData;
+import javaCourse.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Nadejda.Fedorova on 25.04.2016.
@@ -73,8 +72,8 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
   }
 
-  public Set<GroupData> all() {
-    Set<GroupData> groups = new HashSet<GroupData>();
+  public Groups all() {
+    Groups groups = new Groups();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
