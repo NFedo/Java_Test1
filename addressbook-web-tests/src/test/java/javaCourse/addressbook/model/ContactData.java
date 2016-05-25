@@ -9,6 +9,7 @@ public class ContactData {
   private String address;
   private String phoneHome;
   private String phoneMobile;
+  private String phoneWork;
   private String email;
   // private int iDay;
   // private int iMonth;
@@ -42,6 +43,10 @@ public class ContactData {
 
   public String getPhoneMobile() {
     return phoneMobile;
+  }
+
+  public String getPhoneWork() {
+    return phoneWork;
   }
 
   public String getEmail() {
@@ -102,6 +107,11 @@ public class ContactData {
 
   public ContactData withPhoneMobile(String phoneMobile) {
     this.phoneMobile = phoneMobile;
+    return this;
+  }
+
+  public ContactData withPhoneWork(String phoneWork) {
+    this.phoneWork = phoneWork;
     return this;
   }
 
