@@ -3,9 +3,11 @@ package javaCourse.addressbook.model;
 public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstName;
+  private String middleName;
   private String lastName;
   private String nickName;
   private String company;
+  private String title;
   private String address;
   private String phoneHome;
   private String phoneMobile;
@@ -15,15 +17,19 @@ public class ContactData {
   private String email2;
   private String email3;
   private String allEmails;
-  // private int iDay;
-  // private int iMonth;
-  // private String year;
+  private String homePage;
+  private int iDay;
+  private int iMonth;
+  private String strMonth;
+  private String year;
   // private int iGroup;
-  private String iGroup;
+  private String cGroup;
 
   public int getId() { return id;  }
 
   public String getFirstName() { return firstName; }
+
+  public String getMiddleName() { return middleName; }
 
   public String getLastName() {
     return lastName;
@@ -35,6 +41,10 @@ public class ContactData {
 
   public String getCompany() {
     return company;
+  }
+
+  public String getTitle() {
+    return title;
   }
 
   public String getAddress() {
@@ -69,13 +79,19 @@ public class ContactData {
 
   public String getAllEmails() { return allEmails;  }
 
-  // public int getiDay() {    return iDay;  }
+  public String getHomePage() {
+    return homePage;
+  }
 
-  // public int getiMonth() {    return iMonth;  }
+  public int getiDay() { return iDay; }
 
-  // public String getYear() {    return year;  }
+  public int getiMonth() { return iMonth; }
 
-  public String getiGroup() { return iGroup; }
+  public String getStrMonth() { return strMonth; }
+
+  public String getYear() { return year; }
+
+  public String getcGroup() { return cGroup; }
 
   @Override
   public String toString() {
@@ -96,6 +112,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withMiddleName(String middleName) {
+    this.middleName = middleName;
+    return this;
+  }
+
   public ContactData withLastName(String lastName) {
     this.lastName = lastName;
     return this;
@@ -108,6 +129,11 @@ public class ContactData {
 
   public ContactData withCompany(String company) {
     this.company = company;
+    return this;
+  }
+
+  public ContactData withTitle(String title) {
+    this.title = title;
     return this;
   }
 
@@ -156,23 +182,33 @@ public class ContactData {
     return this;
   }
 
- /* public ContactData withiDay(int iDay) {
-    this.iDay = iDay + 2; // чтобы задать число;
+  public ContactData withHomePage(String homePage) {
+    this.homePage = homePage;
+    return this;
+  }
+
+  public ContactData withiDay(int iDay) {
+    this.iDay = iDay; // чтобы задать число;
     return this;
   }
 
   public ContactData withiMonth(int iMonth) {
-    this.iMonth = iMonth + 1; // чтобы задать месяц;
+    this.iMonth = iMonth; // чтобы задать месяц цифрами;
+    return this;
+  }
+
+  public ContactData withMonthStr(String strMonth) {
+    this.strMonth = strMonth; // чтобы задать месяц;
     return this;
   }
 
   public ContactData withYear(String year) {
     this.year = year;
     return this;
-  }*/
+  }
 
-  public ContactData withiGroup(String iGroup) {
-    this.iGroup = iGroup;
+  public ContactData withcGroup(String cGroup) {
+    this.cGroup = cGroup;
     return this;
   }
 

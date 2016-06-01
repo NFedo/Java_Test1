@@ -18,8 +18,8 @@ public class ContactCreationTests extends TestBase {
             .withCompany("Peter-Service").withAddress("Шпалерная ул., дом 36, оф. 503")
             .withPhoneHome("921-791-1113").withPhoneMobile("921-791-1114")
             .withEmail("nadejda2.fedorova2@peter-service.com")
-            /* 8, 6, "1983",*/
-            .withiGroup("test1");
+            .withiDay(8).withiMonth(6).withYear("1983")
+            .withcGroup("test1");
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
