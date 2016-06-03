@@ -1,5 +1,7 @@
 package javaCourse.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstName;
@@ -24,6 +26,7 @@ public class ContactData {
   private String year;
   // private int iGroup;
   private String cGroup;
+  private File photo;
 
   public int getId() { return id;  }
 
@@ -77,7 +80,7 @@ public class ContactData {
     return email3;
   }
 
-  public String getAllEmails() { return allEmails;  }
+  public String getAllEmails() { return allEmails; }
 
   public String getHomePage() {
     return homePage;
@@ -92,6 +95,9 @@ public class ContactData {
   public String getYear() { return year; }
 
   public String getcGroup() { return cGroup; }
+
+  public File getPhoto() { return photo; }
+
 
   @Override
   public String toString() {
@@ -209,6 +215,11 @@ public class ContactData {
 
   public ContactData withcGroup(String cGroup) {
     this.cGroup = cGroup;
+    return this;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
     return this;
   }
 
