@@ -55,9 +55,22 @@ public class GroupCreationTests extends TestBase {
     return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
-    @Test(dataProvider = "validGroupsFromJson") // validGroupsFromXml
-  public void testGroupCreation(GroupData group) {
+  @Test(dataProvider = "validGroupsFromXml") // validGroupsFromXml
+  public void testGroupCreation_1(GroupData group) {
  //   GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
+    app.goTo().groupPage();
+    Groups before = app.group().all();
+    app.group().create(group);
+    Groups after = app.group().all();
+    assertThat(app.group().count(), equalTo(before.size() + 1)); // быстрая проверка
+    // добавляем новую группу
+    assertThat(after, equalTo(
+            before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+
+  @Test(dataProvider = "validGroupsFromJson") // validGroupsFromXml
+  public void testGroupCreation_2(GroupData group) {
+    //   GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
     app.goTo().groupPage();
     Groups before = app.group().all();
     app.group().create(group);

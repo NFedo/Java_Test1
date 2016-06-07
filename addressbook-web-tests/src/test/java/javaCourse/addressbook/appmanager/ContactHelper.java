@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -36,7 +37,13 @@ public class ContactHelper extends HelperBase {
     type(By.name("email2"),contactData.getEmail2());
     type(By.name("email3"),contactData.getEmail3());
     // фото обязательно абсолютный путь !
-    attach(By.name("photo"),contactData.getPhoto());
+    if (contactData.getPhotoPath() != null) {
+      File photo = new File(contactData.getPhotoPath());
+      attach(By.name("photo"), photo);
+    }
+    else {
+      attach(By.name("photo"), contactData.getPhoto());
+    }
 
     // день
     if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[" + (contactData.getiDay() + 2)+ "]")).isSelected()) {

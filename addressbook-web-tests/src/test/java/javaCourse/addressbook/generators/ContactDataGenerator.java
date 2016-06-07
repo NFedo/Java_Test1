@@ -3,6 +3,9 @@ package javaCourse.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.thoughtworks.xstream.XStream;
 import javaCourse.addressbook.model.ContactData;
 
 import java.io.File;
@@ -23,6 +26,10 @@ public class ContactDataGenerator {
   @Parameter(names = "-f", description = "Target file")
   public String file; // напрямую файл нельзя
 
+  @Parameter(names = "-d", description = "Data format")
+  public String format;
+
+
   public static void main(String[] args ) throws IOException {
     ContactDataGenerator generator = new ContactDataGenerator();
     JCommander jCommander = new JCommander(generator);
@@ -37,23 +44,49 @@ public class ContactDataGenerator {
 
   private void run() throws IOException {
     List<ContactData> contacts = generateContacts(count);
-    save(contacts, new File(file));
+    if (format.equals("csv")) {
+      saveAsCsv(contacts, new File(file));
+    } else if (format.equals("xml")) {
+      saveAsXml(contacts, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJson(contacts, new File(file));
+    } else {
+      System.out.println("Unrecognized format " + format);
+    }
   }
 
-  private void save(List<ContactData> contacts, File file) throws IOException {
+  private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    String json = gson.toJson(contacts);
+    Writer writer = new FileWriter(file);
+    writer.write(json);
+    writer.close();
+  }
+
+  private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
+    XStream xstream = new XStream();
+    xstream.processAnnotations(ContactData.class);
+    String xml = xstream.toXML(contacts);
+    Writer writer = new FileWriter(file);
+    writer.write(xml);
+    writer.close();
+  }
+
+  private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts) {
-      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n"
-              , contact.getFirstName(),contact.getMiddleName(), contact.getLastName()
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n"
+              , contact.getFirstName(), contact.getMiddleName(), contact.getLastName()
               , contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork()
-              , contact.getEmail(), contact.getEmail3(), contact.getEmail3()
-              , contact.getAddress()
-              , contact.getcGroup()
-              , contact.getCompany(),contact.getTitle()
-      ));
+              , contact.getEmail(), contact.getEmail2(), contact.getEmail3()
+              , contact.getCompany(),contact.getTitle(), contact.getAddress()
+              , contact.getiDay(),contact.getiMonth(),contact.getYear()
+              , contact.getPhotoPath()
+              , contact.getcGroup())
+      );
     }
-    writer.close(); // всегда надо закрывать файл
+    writer.close();
   }
 
   private List<ContactData> generateContacts(int count) {
@@ -65,9 +98,11 @@ public class ContactDataGenerator {
               .withPhoneWork(String.format("Ph.+7 921 791 111%s", i))
               .withEmail(String.format("Email %s", i)).withEmail2(String.format("Email2 %s", i))
               .withEmail3(String.format("Email3 %s", i))
-              .withAddress(String.format("Address %s", i))
-              .withcGroup(String.format("test %s", i))
               .withCompany(String.format("Company %s", i)).withTitle(String.format("Title %s", i))
+              .withAddress(String.format("Address %s", i))
+              .withiDay(i+1).withiMonth(i+1).withYear((String.valueOf(1970 + i)))
+              .withPhotoPath("src/test/resources/Syoma.jpg")
+              .withcGroup("test 1")
       );
     }
     return contacts;

@@ -1,0 +1,59 @@
+<list>
+  <contact>
+    <firstName>Name 0</firstName>
+    <middleName>Middle Name 0</middleName>
+    <lastName>Surname 0</lastName>
+    <company>Company 0</company>
+    <title>Title 0</title>
+    <address>Address 0</address>
+    <phoneHome>Ph.+7 921 791 1110</phoneHome>
+    <phoneMobile>Ph.+7 921 791 1110</phoneMobile>
+    <phoneWork>Ph.+7 921 791 1110</phoneWork>
+    <email>Email 0</email>
+    <email2>Email2 0</email2>
+    <email3>Email3 0</email3>
+    <iDay>1</iDay>
+    <iMonth>1</iMonth>
+    <year>1970</year>
+    <cGroup>test 1</cGroup>
+    <photoPath>src/test/resources/Syoma.jpg</photoPath>
+  </contact>
+  <contact>
+    <firstName>Name 1</firstName>
+    <middleName>Middle Name 1</middleName>
+    <lastName>Surname 1</lastName>
+    <company>Company 1</company>
+    <title>Title 1</title>
+    <address>Address 1</address>
+    <phoneHome>Ph.+7 921 791 1111</phoneHome>
+    <phoneMobile>Ph.+7 921 791 1111</phoneMobile>
+    <phoneWork>Ph.+7 921 791 1111</phoneWork>
+    <email>Email 1</email>
+    <email2>Email2 1</email2>
+    <email3>Email3 1</email3>
+    <iDay>2</iDay>
+    <iMonth>2</iMonth>
+    <year>1971</year>
+    <cGroup>test 1</cGroup>
+    <photoPath>src/test/resources/Syoma.jpg</photoPath>
+  </contact>
+  <contact>
+    <firstName>Name 2</firstName>
+    <middleName>Middle Name 2</middleName>
+    <lastName>Surname 2</lastName>
+    <company>Company 2</company>
+    <title>Title 2</title>
+    <address>Address 2</address>
+    <phoneHome>Ph.+7 921 791 1112</phoneHome>
+    <phoneMobile>Ph.+7 921 791 1112</phoneMobile>
+    <phoneWork>Ph.+7 921 791 1112</phoneWork>
+    <email>Email 2</email>
+    <email2>Email2 2</email2>
+    <email3>Email3 2</email3>
+    <iDay>3</iDay>
+    <iMonth>3</iMonth>
+    <year>1972</year>
+    <cGroup>test 1</cGroup>
+    <photoPath>src/test/resources/Syoma.jpg</photoPath>
+  </contact>
+</list>
