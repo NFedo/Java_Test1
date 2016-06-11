@@ -63,6 +63,7 @@ public class GroupCreationTests extends TestBase {
     // добавляем новую группу
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    verifyGroupListInUI();
   }
 
   @Test(dataProvider = "validGroupsFromJson") // validGroupsFromXml
@@ -76,6 +77,7 @@ public class GroupCreationTests extends TestBase {
     // добавляем новую группу
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    verifyGroupListInUI();
   }
 
   @Test
@@ -89,5 +91,6 @@ public class GroupCreationTests extends TestBase {
     assertThat(app.group().count(), equalTo(before.size())); // быстрая проверка количества групп
     // новая группа не создалась
     assertThat(after, equalTo(before));
+    verifyGroupListInUI();
   }
 }
