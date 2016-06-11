@@ -3,6 +3,7 @@ package javaCourse.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import javaCourse.addressbook.model.GroupData;
@@ -54,10 +55,10 @@ public class GroupCreationTests extends TestBase {
   @Test(dataProvider = "validGroupsFromXml") // validGroupsFromXml
   public void testGroupCreation_1(GroupData group) {
  //   GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
+    Groups before = app.db().groups();
     app.goTo().groupPage();
-    Groups before = app.group().all();
     app.group().create(group);
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
     assertThat(app.group().count(), equalTo(before.size() + 1)); // быстрая проверка
     // добавляем новую группу
     assertThat(after, equalTo(
@@ -67,25 +68,26 @@ public class GroupCreationTests extends TestBase {
   @Test(dataProvider = "validGroupsFromJson") // validGroupsFromXml
   public void testGroupCreation_2(GroupData group) {
     //   GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
+    Groups before = app.db().groups();
     app.goTo().groupPage();
-    Groups before = app.group().all();
     app.group().create(group);
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
     assertThat(app.group().count(), equalTo(before.size() + 1)); // быстрая проверка
     // добавляем новую группу
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
-  @Test (enabled = false)
+  @Test
   public void testBadGroupCreation() {
+    Groups before = app.db().groups();
     app.goTo().groupPage();
-    Groups before = app.group().all(); // запрещенный символ
-    GroupData group = new GroupData().withName("test4").withHeader("test42").withFooter("test43");
+    // запрещенный символ
+    GroupData group = new GroupData().withName("test4'").withHeader("test42").withFooter("test43");
     app.group().create(group);
-    assertThat(app.group().count(), equalTo(before.size())); // быстрая проверка
-    Groups after = app.group().all();
-    // добавляем новую группу
+    Groups after = app.db().groups();
+    assertThat(app.group().count(), equalTo(before.size())); // быстрая проверка количества групп
+    // новая группа не создалась
     assertThat(after, equalTo(before));
   }
 }

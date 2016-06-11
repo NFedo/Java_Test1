@@ -53,29 +53,31 @@ public class ContactCreationTests extends TestBase {
   }
 
   @Test (dataProvider = "validContactsFromXml")
-  public void testContactCreation_1(ContactData contact) {
+  public void testContactCreation(ContactData contact) {
+    Contacts before = app.db().contacts();
     app.goTo().homePage();
-    Contacts before = app.contact().all();
     app.goTo().addNewContact();
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
   @Test (dataProvider = "validContactsFromJson")
   public void testContactCreation_2(ContactData contact) {
+    Contacts before = app.db().contacts();
     app.goTo().homePage();
-    Contacts before = app.contact().all();
     app.goTo().addNewContact();
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+   // System.out.println(app.contact().count() + "before");
+   // System.out.println((before.size() + 1) + " after");
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
-
+/*
   @Test
   public void testContactCreation_3() {
     app.goTo().homePage();
@@ -95,6 +97,8 @@ public class ContactCreationTests extends TestBase {
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
+
+  */
 /*
   @Test
   public void testCurrentDir() {

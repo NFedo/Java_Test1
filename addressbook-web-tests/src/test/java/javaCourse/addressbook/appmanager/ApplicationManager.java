@@ -26,6 +26,7 @@ public class ApplicationManager {
   private String browser;
 
   private final Properties properties;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -39,6 +40,8 @@ public class ApplicationManager {
     // System.out.println(BrowserType.FIREFOX);
     // System.out.println(BrowserType.CHROME);
     // System.out.println(BrowserType.IE);
+
+    dbHelper = new DbHelper(); // соединение с базой данных
 
     if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver();
@@ -71,5 +74,9 @@ public class ApplicationManager {
 
   public NavigationHelper goTo() {
     return navigationHelper;
+  }
+
+  public DbHelper db() {
+    return dbHelper;
   }
 }

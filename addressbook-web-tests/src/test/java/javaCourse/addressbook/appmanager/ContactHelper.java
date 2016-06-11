@@ -41,7 +41,7 @@ public class ContactHelper extends HelperBase {
       File photo = new File(contactData.getPhotoPath());
       attach(By.name("photo"), photo);
     }
-    else {
+    else if (contactData.getPhoto() != null) {
       attach(By.name("photo"), contactData.getPhoto());
     }
 

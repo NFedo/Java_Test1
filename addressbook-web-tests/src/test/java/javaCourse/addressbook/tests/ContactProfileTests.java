@@ -17,8 +17,8 @@ public class ContactProfileTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
+    if (app.db().contacts().size() == 0) {
+      app.goTo().homePage();
       app.contact().create(new ContactData().withFirstName("Nadejda7").withLastName("Fedorova7")
               .withPhoneHome("+7(921)-791-1113").withPhoneMobile("+7(921)-791-1114").withPhoneWork("+7(921)-791-1115")
               .withEmail("123@mail.ru").withcGroup("test1"));
@@ -35,6 +35,8 @@ public class ContactProfileTests extends TestBase {
     // все пробельные символы тоже убираем
     if (contactStr.indexOf("Member of:") > 0) {
       contactStr = contactStr.substring(0, contactStr.indexOf("Member of:") - 1);}
+    // System.out.println(contactStr);
+    // assertThat(contactStr, equalTo(mergeInfo(contactEdFrm)));
     assertThat(cleaned(contactStr), equalTo(mergeInfo(contactEdFrm)));
   }
 
@@ -60,11 +62,11 @@ public class ContactProfileTests extends TestBase {
       mergeContactInfo = mergeContactInfo + contact.getTitle();
     }
 
-    if (contact.getNickName().length() > 0) {
+    if (contact.getCompany().length() > 0) {
       mergeContactInfo = mergeContactInfo + contact.getCompany();
     }
 
-    if (contact.getNickName().length() > 0) {
+    if (contact.getAddress().length() > 0) {
       mergeContactInfo = mergeContactInfo + contact.getAddress();
     }
 
@@ -101,7 +103,8 @@ public class ContactProfileTests extends TestBase {
       int ages = (c.get(Calendar.YEAR) - Integer.parseInt(contact.getYear()));
       mergeContactInfo = mergeContactInfo + "Birthday " + contact.getiDay() + ". " + contact.getStrMonth() + " " + contact.getYear() + " (" + ages + ")";
     }
-    //  System.out.println(mergeContactInfo);
+    // System.out.println(mergeContactInfo);
+    // return mergeContactInfo;
     return cleaned(mergeContactInfo);
   }
 
