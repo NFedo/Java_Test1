@@ -5,6 +5,7 @@ import javaCourse.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -28,6 +29,16 @@ public class GroupHelper extends HelperBase {
   public void selectGroupById(int id) {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
+  public void selectAnyGroup() {
+    wd.findElement(By.name("selected[]")).click();
+  }
+
+  public void selectAnyGroupByInd(int ind) {
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/span[" + ind + "]/input")).isSelected()) {
+      wd.findElement(By.xpath("//div[@id='content']/form/span[" + ind + "]/input")).click();
+    }
+  }
+
 
   public void initGroupModification() {
     click(By.name("edit"));
@@ -94,4 +105,12 @@ public class GroupHelper extends HelperBase {
   public boolean isThereAGroup() { return isElementPresent(By.name("selected[]")); }
 
   public int count() { return wd.findElements(By.name("selected[]")).size(); }
+
+  public void filterContactsByGroup(GroupData group) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+  }
+
+  public void filterContactsNoGroup() {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[none]");
+  }
 }

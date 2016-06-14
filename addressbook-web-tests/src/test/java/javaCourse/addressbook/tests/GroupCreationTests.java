@@ -85,7 +85,7 @@ public class GroupCreationTests extends TestBase {
     Groups before = app.db().groups();
     app.goTo().groupPage();
     // запрещенный символ
-    GroupData group = new GroupData().withName("test4'").withHeader("test42").withFooter("test43");
+    GroupData group = new GroupData().withName("test4'").withHeader("header4").withFooter("footer4");
     app.group().create(group);
     Groups after = app.db().groups();
     assertThat(app.group().count(), equalTo(before.size())); // быстрая проверка количества групп
