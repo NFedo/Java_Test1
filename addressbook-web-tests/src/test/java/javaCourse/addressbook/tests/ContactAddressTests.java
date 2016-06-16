@@ -17,8 +17,7 @@ public class ContactAddressTests extends TestBase {
     if (app.db().contacts().size() == 0) {
       app.goTo().homePage();
       app.contact().create(new ContactData().withFirstName("Nadejda7").withLastName("Fedorova7")
-              .withAddress("191123, Санкт-Петербург, Шпалерная ул., дом 36, офис 512")
-              .withcGroup("test1"));
+              .withAddress("191123, Санкт-Петербург, Шпалерная ул., дом 36, офис 512"));
     }
   }
 

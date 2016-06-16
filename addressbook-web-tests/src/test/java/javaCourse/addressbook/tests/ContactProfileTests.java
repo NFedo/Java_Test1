@@ -21,7 +21,7 @@ public class ContactProfileTests extends TestBase {
       app.goTo().homePage();
       app.contact().create(new ContactData().withFirstName("Nadejda7").withLastName("Fedorova7")
               .withPhoneHome("+7(921)-791-1113").withPhoneMobile("+7(921)-791-1114").withPhoneWork("+7(921)-791-1115")
-              .withEmail("123@mail.ru").withcGroup("test1"));
+              .withEmail("123@mail.ru"));
     }
   }
 

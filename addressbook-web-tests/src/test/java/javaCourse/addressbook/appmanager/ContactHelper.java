@@ -2,6 +2,8 @@ package javaCourse.addressbook.appmanager;
 
 import javaCourse.addressbook.model.ContactData;
 import javaCourse.addressbook.model.Contacts;
+import javaCourse.addressbook.model.GroupData;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +12,7 @@ import org.testng.Assert;
 
 import java.io.File;
 import java.util.List;
+
 
 /**
  * Created by Nadejda.Fedorova on 25.04.2016.
@@ -61,14 +64,23 @@ public class ContactHelper extends HelperBase {
     }*/
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getcGroup());
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1); // не больше одной группы при создании
+        new Select(wd.findElement(By.name("new_group")))
+                .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
     } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
+       // проверяем, что это не форма добавления нового контакта, а форма редактирования старого
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
   public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+  }
+
+  public void selectAnyContact() {
+    wd.findElement(By.name("selected[]")).click();
   }
 
   public void initContactModificationById(int id) {
@@ -222,5 +234,29 @@ public class ContactHelper extends HelperBase {
 
     wd.navigate().back();
     return profile;
+  }
+
+  public void addToAnyGroup(ContactData contact) {
+    selectContactById(contact.getId());
+    if (!wd.findElement(By.xpath("//div[@class='right']//select[1]//option[1]")).isSelected()) {
+      wd.findElement(By.xpath("//div[@class='right']//select[1]//option[1]")).click();
+    }
+    wd.findElement(By.name("add")).click();
+    contactCache = null;
+    returnToHomePage();
+  }
+
+  public void addToGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+    wd.findElement(By.name("add")).click();
+    contactCache = null;
+    returnToHomePage();
+  }
+
+  public void removeFromGroup() {
+    wd.findElement(By.name("remove")).click();
+    contactCache = null;
+    returnToHomePage();
   }
 }

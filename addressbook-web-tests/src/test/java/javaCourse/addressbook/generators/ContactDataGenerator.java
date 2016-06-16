@@ -29,7 +29,6 @@ public class ContactDataGenerator {
   @Parameter(names = "-d", description = "Data format")
   public String format;
 
-
   public static void main(String[] args ) throws IOException {
     ContactDataGenerator generator = new ContactDataGenerator();
     JCommander jCommander = new JCommander(generator);
@@ -76,15 +75,13 @@ public class ContactDataGenerator {
     System.out.println(new File(".").getAbsolutePath());
     try (Writer writer = new FileWriter(file)) {
       for (ContactData contact : contacts) {
-        writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n"
+        writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n"
                 , contact.getFirstName(), contact.getMiddleName(), contact.getLastName()
                 , contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork()
                 , contact.getEmail(), contact.getEmail2(), contact.getEmail3()
                 , contact.getCompany(),contact.getTitle(), contact.getAddress()
                 , contact.getiDay(),contact.getiMonth(),contact.getYear()
-                , contact.getPhotoPath()
-                , contact.getcGroup())
-        );
+                , contact.getPhotoPath()));
       }
     }
   }
@@ -96,14 +93,12 @@ public class ContactDataGenerator {
               .withMiddleName(String.format("Middle Name %s", i)).withLastName(String.format("Surname %s", i))
               .withPhoneHome(String.format("Ph.+7 921 791 111%s", i)).withPhoneMobile(String.format("Ph.+7 921 791 111%s", i))
               .withPhoneWork(String.format("Ph.+7 921 791 111%s", i))
-              .withEmail(String.format("Email%s@mail.ru", i)).withEmail2(String.format("Email2%s@mail.ru", i))
-              .withEmail3(String.format("Email3%s@mail.ru", i))
+              .withEmail(String.format("Email%s@mail.ru", i)).withEmail2(String.format("Email2%s", i))
+              .withEmail3(String.format("Email3%s", i))
               .withCompany(String.format("Company %s", i)).withTitle(String.format("Title %s", i))
               .withAddress(String.format("Address %s", i))
               .withiDay(i+1).withiMonth(i+1).withYear((String.valueOf(1970 + i)))
-              .withPhotoPath("src/test/resources/Syoma.jpg")
-              .withcGroup("test 1")
-      );
+              .withPhotoPath("src/test/resources/Syoma.jpg"));
     }
     return contacts;
   }

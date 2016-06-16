@@ -20,8 +20,7 @@ public class ContactEmailTests extends TestBase {
     if (app.db().contacts().size() == 0) {
       app.goTo().homePage();
       app.contact().create(new ContactData().withFirstName("Nadejda7").withLastName("Fedorova7")
-                    .withEmail("Nadejda1@mail.ru").withEmail2("Nadejda2@mail.ru").withEmail3("Nadejda3@mail.ru")
-                    .withcGroup("test1"));
+                    .withEmail("Nadejda1@mail.ru").withEmail2("Nadejda2@mail.ru").withEmail3("Nadejda3@mail.ru"));
     }
   }
 
